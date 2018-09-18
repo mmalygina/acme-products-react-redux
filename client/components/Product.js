@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Product = ({path, match, product}) => {
+const Product = ({product}) => {
     return (
         <div className='product'>
             <div className='product-name'>{product.name} with rating {product.rating}</div>

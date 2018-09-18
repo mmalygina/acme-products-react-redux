@@ -38,6 +38,7 @@ class CreateForm extends Component {
                 <h3> OR create a new Product </h3>
                 <input
                     type="text"
+                    name ='name'
                     value={this.state.name}
                     onChange = {this.handleChange}
                 />

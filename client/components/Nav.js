@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getProduct } from './../store';
 
 const Nav = ({ products, topRated }) => {
     return (
@@ -12,20 +13,24 @@ const Nav = ({ products, topRated }) => {
                 <button>Create Product</button>
             </Link>
             {
-                topRated ? <Link to={`/products/${topRated.id}`}>Top Rated ({topRated.name})</Link> : null
+                topRated ? <Link to={`/products/${topRated.id}`} onClick={() => getProduct(topRated.id)}>Top Rated ({topRated.name})</Link> : null
             }
         </div>
     )
 }
 
 const mapStateToProps = ({ products }) => {
-    const id = Math.max.apply(Math, products.map((elem) => {
-        return elem.id;   
-    }))
-    const topRated = products.filter((e) => e.id === id)[0]
+    const rating = Math.max.apply(Math, products.map(elem => elem.rating))
+    const topRated = products.filter((e) => e.rating === rating)[0]
     return { 
         products,
         topRated
     };
 }
-export default connect(mapStateToProps)(Nav);
+
+const mapDispatchToPropd = (dispatch) => {
+    return { 
+        getProduct: (id) => dispatch(getProduct(id)) 
+        }
+}
+export default connect(mapStateToProps, mapDispatchToPropd)(Nav);
