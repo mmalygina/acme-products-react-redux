@@ -20,7 +20,7 @@ const Nav = ({ products, topRated }) => {
 }
 
 const mapStateToProps = ({ products }) => {
-    const rating = Math.max.apply(Math, products.map(elem => elem.rating))
+    const rating = Math.max.apply(...products.map(elem => elem.rating))
     const topRated = products.filter((e) => e.rating === rating)[0]
     return { 
         products,
